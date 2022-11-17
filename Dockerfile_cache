@@ -1,0 +1,16 @@
+FROM sbtscala/scala-sbt:eclipse-temurin-17.0.4_1.7.1_3.2.0
+
+COPY project /app/project
+COPY src /app/src
+COPY build.sbt /app/
+
+WORKDIR /app
+
+#Just to check cache size
+RUN --mount=type=cache,target=/var/cache/coursier du -h -d 1 /var/cache/coursier
+
+RUN --mount=type=cache,target=/var/cache/coursier \
+ sbt -Dsbt.coursier.home=/var/cache/coursier update assembly -verbose -debug
+
+#Just to check cache size
+RUN --mount=type=cache,target=/var/cache/coursier du -h -d 1 /var/cache/coursier
