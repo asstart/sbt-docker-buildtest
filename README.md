@@ -3,7 +3,7 @@
 [SBT Dependency management](https://www.scala-sbt.org/1.x/docs/Library-Dependencies.html)
 [Coursier cache](https://get-coursier.io/docs/cache)
 
-## 1. No external mapping for sbt cache
+## 1. Without using cache for dependencies
 
 1. Run ```docker build -t asstart.io.sbtbuildtest:0.1 .  --progress=plain``` - every layer has built
 2. Run again ```docker build -t asstart.io.sbtbuildtest:0.1 .  --progress=plain``` - all layers cached
@@ -42,7 +42,7 @@ Cache size after ```sbt build assembly``` | 167 M
 4. Run again ```docker build -t asstart.io.sbtbuildtest-cached:0.1 .  --progress=plain -f Dockerfile_cache``` - every layer starts from ```COPY src /app/src```
    has built but sbt dependencies were cached
 
-Operation | Size MB
+Operation | Size
 --- | ---
 Cache size before ```sbt build assembly``` | 167 M
 Cache size after ```sbt build assembly``` | 167 M
@@ -53,7 +53,7 @@ Cache size after ```sbt build assembly``` | 167 M
 8. Run again ```docker build -t asstart.io.sbtbuildtest-cached:0.1 .  --progress=plain -f Dockerfile_cache``` - every layer starts from ```COPY src /app/src```
    has built, new dependencies have downloaded
 
-Operation | Size MB
+Operation | Size
 --- | ---
 Cache size before ```sbt build assembly``` | 167 M
 Cache size after ```sbt build assembly``` | 210 M
@@ -62,7 +62,7 @@ Cache size after ```sbt build assembly``` | 210 M
 10. Run again ```docker build -t asstart.io.sbtbuildtest-cached:0.1 .  --progress=plain -f Dockerfile_cache``` - every layer starts from ```COPY src /app/src```
        has built, sbt dependencies cached
 
-Operation | Size MB
+Operation | Size
 --- | ---
 Cache size before ```sbt build assembly``` | 210 M
 Cache size after ```sbt build assembly``` | 210 M
@@ -71,7 +71,7 @@ Cache size after ```sbt build assembly``` | 210 M
 12. Run again ```docker build -t asstart.io.sbtbuildtest-cached:0.1 .  --progress=plain -f Dockerfile_cache``` - every layer starts from ```COPY src /app/src```
     has built, sbt dependencies cached
 
-Operation | Size MB
+Operation | Size
 --- | ---
 Cache size before ```sbt build assembly``` | 210 M
 Cache size after ```sbt build assembly``` | 210 M

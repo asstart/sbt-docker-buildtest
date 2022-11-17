@@ -1,6 +1,6 @@
 FROM sbtscala/scala-sbt:eclipse-temurin-17.0.4_1.7.1_3.2.0
 
-ENV COURSIER_CACHE=/var/cache/coursier
+ENV CACHE=/var/cache/coursier
 
 COPY project /app/project
 COPY src /app/src
@@ -8,7 +8,7 @@ COPY build.sbt /app/
 
 WORKDIR /app
 
-RUN echo $COURSIER_CACHE
+RUN echo $CACHE
 
-RUN --mount=type=cache,target=$COURSIER_CACHE \
- sbt -Dsbt.coursier.home=$COURSIER_CACHE update assembly -verbose -debug
+RUN --mount=type=cache,target=$CACHE \
+ sbt -Dsbt.coursier.home=$CACHE update assembly -verbose -debug
